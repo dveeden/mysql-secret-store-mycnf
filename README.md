@@ -1,3 +1,9 @@
+Description
+===========
+
+This allows MySQL Shell (mysqlsh) to read the username and password from `~/.my.cnf`, similar to
+what `mysql` does by default.
+
 Usage
 =====
 
