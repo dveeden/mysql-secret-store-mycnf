@@ -27,3 +27,8 @@ Installation
     go build
     mv mysql-secret-store-mycnf $(dirname $(which mysqlsh))
 
+Related
+=======
+
+* [MySQL Bug #93003](https://bugs.mysql.com/bug.php?id=93003)
+
