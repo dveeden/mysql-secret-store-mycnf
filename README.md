@@ -23,6 +23,10 @@ And then:
 Installation
 ============
 
+From binary: [Download](https://github.com/dveeden/mysql-secret-store-mycnf/releases) and place in the same directory as mysqlsh
+
+From source:
+
     go get github.com/go-ini/ini
     go build
     mv mysql-secret-store-mycnf $(dirname $(which mysqlsh))
