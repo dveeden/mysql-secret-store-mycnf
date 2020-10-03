@@ -8,12 +8,12 @@ import (
 	"os/user"
 )
 
-type ListEntry struct {
+type listEntry struct {
 	ServerURL  string
 	SecretType string
 }
 
-type FullEntry struct {
+type fullEntry struct {
 	ServerURL  string
 	SecretType string
 	Secret     string
@@ -28,11 +28,11 @@ func list(cfg *ini.File) {
 	if len(host) < 1 {
 		host = "localhost"
 	}
-	entry := ListEntry{
+	entry := listEntry{
 		cfg.Section("client").Key("user").String() + "@" + host,
 		"password",
 	}
-	j, err := json.Marshal([]ListEntry{entry})
+	j, err := json.Marshal([]listEntry{entry})
 	if err != nil {
 		fmt.Printf("Fail to encode json %v", err)
 		os.Exit(1)
@@ -45,7 +45,7 @@ func get(cfg *ini.File) {
 	if len(host) < 1 {
 		host = "localhost"
 	}
-	entry := FullEntry{
+	entry := fullEntry{
 		cfg.Section("client").Key("user").String() + "@" + host,
 		"password",
 		cfg.Section("client").Key("password").String(),
@@ -68,7 +68,10 @@ func main() {
 		os.Exit(1)
 	}
 
-	command := os.Args[1]
+	command := ""
+	if len(os.Args) > 1 {
+		command = os.Args[1]
+	}
 	switch command {
 	case "version":
 		version()
@@ -80,8 +83,7 @@ func main() {
 		get(cfg)
 		break
 	default:
-		fmt.Printf("Unknown or unsupported command: %s\n", command)
+		fmt.Printf("Unknown or unsupported command: '%s', try 'version', 'list' or 'get'\n", command)
 		os.Exit(1)
 	}
-
 }
